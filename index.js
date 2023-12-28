@@ -42,7 +42,7 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
-    await client.connect();
+    // await client.connect();
 
     const appointmentCollection = client
       .db("dochouse")
@@ -108,7 +108,7 @@ async function run() {
     });
 
     // booking related api
-    app.post("/bookings", async (req, res) => {
+    app.post("/bookings",verifyJWT, async (req, res) => {
       const newItem = req.body;
 
       // Check if the slot for the given service is already booked
